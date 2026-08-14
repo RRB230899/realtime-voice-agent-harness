@@ -18,11 +18,16 @@ def main() -> int:
     parser.add_argument("--scenario", choices=SCENARIOS.keys())
     parser.add_argument("--hangup", metavar="CALL_SID",
                         help="force-end a stuck call and exit")
+    parser.add_argument("--download", metavar="CALL_SID",
+                        help="(re)download the recording for a past call and exit")
     args = parser.parse_args()
 
     if args.hangup:
         call_manager.hangup(args.hangup)
         print(f"Hung up {args.hangup}")
+        return 0
+    if args.download:
+        print(f"Recording: {call_manager.download_recording(args.download)}")
         return 0
     if not args.scenario:
         parser.error("--scenario is required (unless using --hangup)")

@@ -16,7 +16,7 @@ from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import Response
 
 from . import config
-from .scenarios import build_instructions
+from .scenarios import build_instructions, get_voice
 from .transcripts import TranscriptWriter
 
 app = FastAPI()
@@ -127,12 +127,12 @@ class Bridge:
                         "transcription": {"model": "gpt-4o-mini-transcribe"},
                         "turn_detection": {
                             "type": "server_vad",
-                            "silence_duration_ms": 600,
+                            "silence_duration_ms": 900,
                         },
                     },
                     "output": {
                         "format": {"type": "audio/pcmu"},
-                        "voice": config.BOT_VOICE,
+                        "voice": get_voice(self.scenario_key, config.BOT_VOICE),
                     },
                 },
             },
@@ -191,4 +191,7 @@ class Bridge:
                 self.transcript.add("PATIENT-BOT", evt.get("transcript", ""))
 
             elif etype == "error":
-                print(f"[openai] error: {evt.get('error', evt)}")
+                err = evt.get("error", {})
+                # benign race: we cancelled just as the response finished
+                if err.get("code") != "response_cancel_not_active":
+                    print(f"[openai] error: {err or evt}")
