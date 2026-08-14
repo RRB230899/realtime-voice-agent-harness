@@ -1,0 +1,30 @@
+# Scenario: schedule_simple
+# Call SID: CA38b63410a79e592419aa4d20e50250a2
+# Started: 2026-08-14T15:46:03
+
+[0:06] AGENT: This call may be recorded for quality and training purposes. Para español, oprima el dos.
+[0:07] PATIENT-BOT: Hello, I’d like to continue in English, please.
+[0:08] AGENT: Welcome to
+[0:09] PATIENT-BOT: I'm sorry, I didn't catch that clearly. Could you repeat what you said?
+[0:18] AGENT: Welcome to [clinic]. How can I help you today?
+[0:21] PATIENT-BOT: Hello, I’m Margaret Chen. I’d like to book a routine check-up for next week, preferably in the morning. Could you help me with that?
+[0:34] AGENT: I can help with that. Would you like to create a demo patient profile first?
+[0:37] AGENT: I just need your first and last name to get started.
+[0:37] PATIENT-BOT: Of course, my first name is Margaret, and my last name is Chen.
+[0:57] AGENT: Your patient profile is set up and your date of birth is July 4th, 2000 for demo purposes. How may I help you today?
+[0:58] PATIENT-BOT: I’d like to schedule that routine check-up for next week, in the morning if possible.
+[1:11] AGENT: Just to confirm, you'd like to book a general office visit for a routine checkup, is that right?
+[1:12] PATIENT-BOT: Yes, that’s correct. A routine check-up.
+[1:30] AGENT: We have morning openings next week with Dr. Zedmaniu Lukoski and Dr. Kelly Noble. Would you like to see times with a specific provider, or is either one fine?
+[1:31] PATIENT-BOT: I’m fine with either one. Could you tell me what morning times are available?
+[1:46] AGENT: On Tuesday, August 18th, we have 9:30 a.m., 10 a.m., and 10:30 a.m. available. Would you like to book one of these times?
+[1:47] PATIENT-BOT: Yes, I’d like the 9:30 a.m. slot, please.
+[2:11] AGENT: You're all set for Tuesday, August 18th at 9:30 AM with Dr. Zbigniew Lukowski at [clinic]. Please bring your photo ID, insurance card, a list of your current medications, and any imaging discs if you have them.
+[2:14] AGENT: Would you like a text message with your appointment details?
+[2:14] PATIENT-BOT: Yes, that would be really helpful, thank you.
+[2:26] AGENT: You'll get a text with your appointment details soon. Is there anything else I can help you with today?
+[2:27] PATIENT-BOT: No, that’s all. Thank you so much for your help. I'll be there.
+[2:38] AGENT: Glad I could help. We look forward to seeing you at your appointment. Have a great day.
+[2:38] PATIENT-BOT: You too, take care.
+
+# Ended: 2026-08-14T15:48:45

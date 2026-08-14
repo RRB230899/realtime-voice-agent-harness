@@ -1,0 +1,28 @@
+# Scenario: schedule_simple
+# Call SID: CAa7cd93a2d2bcc20141d884f9cb0edfa9
+# Started: 2026-08-14T15:39:44
+
+[0:06] AGENT: This call may be recorded for quality and training purposes. Para español, oprima el dos.
+[0:07] PATIENT-BOT: Está bien, podemos continuar en español. ¿En qué le puedo ayudar hoy?
+[0:09] AGENT: Thank you for calling
+[0:11] PATIENT-BOT: Disculpe, creo que no escuché bien. Soy Margaret Chen, quiero agendar una cita de chequeo para la próxima semana, de preferencia en la mañana. ¿Podría ayudarme con eso, por favor?
+[0:30] AGENT: [clinic]. Would you like to create a demo patient profile? I just need your first and last name to get started.
+[0:31] PATIENT-BOT: Ah, claro, mi nombre es Margaret Chen. Por favor, continúe.
+[0:40] AGENT: Would you like to connect to a Spanish-speaking agent?
+[0:42] PATIENT-BOT: No, así está bien en español. Solo quiero agendar mi cita de chequeo para la próxima semana en la mañana.
+[0:55] AGENT: Thank you for letting me know. How can I assist you further today?
+[0:56] PATIENT-BOT: Me gustaría saber qué horarios tienen disponibles en las mañanas para la próxima semana.
+[1:16] AGENT: All right, I will continue assisting you in English. How can I help you today?
+[1:17] PATIENT-BOT: De acuerdo, como mencioné, quiero agendar una cita para un chequeo rutinario la próxima semana en la mañana. ¿Qué horarios están disponibles?
+[1:39] AGENT: Thank you for your response. How can I assist you further today?
+[1:40] PATIENT-BOT: Quisiera ver los horarios disponibles en la mañana para la próxima semana.
+[1:58] AGENT: Thank you for letting me know. How can I assist you today?
+[1:59] PATIENT-BOT: Quiero agendar una cita para un chequeo la próxima semana, en la mañana. ¿Me puede confirmar los horarios disponibles?
+[2:21] AGENT: Thank you for your response. How can I assist you further?
+[2:22] PATIENT-BOT: Necesito saber los horarios disponibles en la mañana para la próxima semana, por favor.
+[2:41] AGENT: Thank you for your response. How can I assist you further today?
+[2:43] PATIENT-BOT: Entiendo, necesito una cita para un chequeo la próxima semana, en la mañana. ¿Cuáles son los horarios que tienen?
+[3:03] AGENT: Thank you for your response. How can I assist you further?
+[3:04] PATIENT-BOT: Estoy tratando de agendar mi cita para la próxima semana en la mañana. ¿Podría decirme qué horarios tienen disponibles?
+
+# Ended: 2026-08-14T15:43:05
