@@ -13,7 +13,9 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 PUBLIC_URL = os.getenv("PUBLIC_URL", "").rstrip("/")
 PORT = int(os.getenv("PORT", "8080"))
 
-OPENAI_REALTIME_URL = "wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview"
+OPENAI_REALTIME_MODEL = os.getenv("OPENAI_REALTIME_MODEL", "gpt-realtime")
+OPENAI_REALTIME_URL = f"wss://api.openai.com/v1/realtime?model={OPENAI_REALTIME_MODEL}"
+BOT_VOICE = os.getenv("BOT_VOICE", "marin")
 
 # Output locations (committed deliverables)
 TRANSCRIPTS_DIR = "output/transcripts"

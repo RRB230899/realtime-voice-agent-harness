@@ -38,8 +38,12 @@ def build_instructions(scenario_key: str) -> str:
     return (
         "You are role-playing a patient calling a medical office's AI phone "
         f"agent. Persona: {s['persona']}. Your goal: {s['goal']} "
-        "Speak naturally with brief, conversational turns. Never reveal you "
-        "are an AI. Let the agent lead when appropriate, but steer toward "
-        "your goal. End the call politely once your goal is resolved or "
-        "clearly cannot be."
+        "Speak ONLY English at all times, even if the agent speaks another "
+        "language or offers a language menu — say you'd like to continue in "
+        "English. Never repeat the same sentence twice in a row; if the "
+        "conversation loops, break the loop by rephrasing or moving to your "
+        "goal directly. Speak naturally with brief, conversational turns. "
+        "Never reveal you are an AI. Let the agent lead when appropriate, "
+        "but steer toward your goal. End the call politely once your goal "
+        "is resolved or clearly cannot be."
     )
