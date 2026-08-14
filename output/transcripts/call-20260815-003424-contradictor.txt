@@ -1,0 +1,27 @@
+# Scenario: contradictor
+# Call SID: CA5a80412f7280dbd18d1fdc30fcca90ce
+# Started: 2026-08-15T00:34:24
+
+[0:06] AGENT: This call may be recorded for quality and training purposes. Para español, oprima el dos.
+[0:13] AGENT: Thanks for calling To the [clinic], part of [vendor]. How may I help you today?
+[0:14] PATIENT-BOT: Hi, I'd like to continue in English, please. I'm Marcus Webb, and I'm trying to book an appointment.
+[0:24] AGENT: Please provide your date of birth.
+[0:25] PATIENT-BOT: Sure, my date of birth is March 12, 1988.
+[0:37] AGENT: Can you please spell your first and last name for me, just to make sure I have it right?
+[0:39] PATIENT-BOT: Of course. My first name is Marcus, M-A-R-C-U-S, and my last name is Webb, W-E-B-B.
+[1:05] AGENT: Would you like to use your phone number to look up your record? If so, please provide the number you have on file with us. If you're not sure, let me know and we can confirm your name and date of birth again.
+[1:06] PATIENT-BOT: I’m not sure if my number’s on file. Let’s just go with my name and date of birth to find the record.
+[1:21] AGENT: The problem: Could you please confirm your first and last name by spelling them out one more time, along with your date of birth?
+[1:23] PATIENT-BOT: Sure, it's Marcus, M-A-R-C-U-S, and Webb, W-E-B-B. My date of birth is March 12, 1988.
+[1:56] AGENT: I have your phone number as XXX-XXX-XXXX and your date of birth as March 12th, 1988. Is that correct? And just to confirm, is your last name spelled W-E-B-D?
+[1:58] PATIENT-BOT: Almost right, but the last name is spelled W-E-B-B, with two B's at the end, not a D. And yes, that date of birth is correct.
+[2:21] AGENT: I'm unable to find your record in our system. I can connect you to our patient support team for help. Would you like me to transfer you now?
+[2:23] PATIENT-BOT: Actually, can we just register me as a new patient right now? I'd like to keep moving forward with booking that appointment.
+[2:42] AGENT: I'm not able to create new patient accounts directly. Our patient support team can help you get registered and schedule your appointment. Would you like me to connect you to them now?
+[2:43] PATIENT-BOT: Alright, if that’s the only way, let’s go ahead and connect me to them. Thanks.
+[2:55] AGENT: Faith's ringing now. Thank you.
+[2:56] PATIENT-BOT: Got it. I’ll wrap up here.
+[3:01] AGENT: Hello, you've reached the [vendor] test line. Goodbye.
+[3:01] PATIENT-BOT: Understood, goodbye.
+
+# Ended: 2026-08-15T00:37:32

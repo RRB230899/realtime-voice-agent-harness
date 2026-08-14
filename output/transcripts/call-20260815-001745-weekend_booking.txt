@@ -1,0 +1,19 @@
+# Scenario: weekend_booking
+# Call SID: CAf02ee1794851ac453a5d62fc1a9f5e4a
+# Started: 2026-08-15T00:17:45
+
+[0:12] AGENT: This call may be recorded for quality and training purposes. ¿Para español, oprima el dos. Thanks for calling [clinic], part of [vendor]. How may I help you today?
+[0:14] PATIENT-BOT: Hi, I'd like to continue in English, please. I'm Tom Bradley, and I'm trying to book an appointment, preferably for Sunday at 10 a.m.
+[0:27] AGENT: Can you please provide your date of birth?
+[0:28] PATIENT-BOT: Sure, my date of birth is March 2nd, 1975.
+[0:47] AGENT: Just to confirm, I have your name as Tom Bradley and your date of birth as March 2nd, 1975. Is that correct? If so, please spell your first and last name for me.
+[0:48] PATIENT-BOT: Yes, that's correct. My first name is spelled T-O-M, and my last name is B-R-A-D-L-E-Y.
+[1:13] AGENT: Would you like to use your phone number to look up your record? If so, please provide the number you have on file with us. If you're not sure, just confirm your first and last name and date of birth for me one more time.
+[1:16] PATIENT-BOT: I’d prefer to confirm my details. The name’s Tom Bradley, spelled T-O-M B-R-A-D-L-E-Y, and my date of birth is March 2nd, 1975.
+[1:41] AGENT: I have your phone number as XXX-XXX-XXXX and your date of birth as March 2, 1975. Is that correct?
+[1:42] PATIENT-BOT: Yes, that’s correct. Now, could we go ahead and check for that Sunday at 10 a.m.?
+[2:03] AGENT: I'm unable to find your record in our system, so I can't proceed with booking your appointment right now. I'll connect you to our patient support team for help. Please stay on the line. Transferring you now. Thank you.
+[2:09] PATIENT-BOT: Understood. Thank you, goodbye.
+[2:09] AGENT: Hello, you've reached the [vendor] test line. Goodbye.
+
+# Ended: 2026-08-15T00:20:01

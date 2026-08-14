@@ -1,0 +1,22 @@
+# Scenario: cancel_appointment
+# Call SID: CA5d4e9eddc05544fbae1380774828ffeb
+# Started: 2026-08-15T01:14:43
+
+[0:12] AGENT: Call may be recorded for quality and training purposes. Para español, oprima el dos. Thanks for calling [clinic], part of [vendor]. How may I help you today?
+[0:13] PATIENT-BOT: Hi, I'd like to continue in English, please. I'm calling to cancel an appointment.
+[0:25] AGENT: I see you're calling from the number we have on file. Am I speaking with Margaret?
+[0:27] PATIENT-BOT: Oh, no, this is actually Margaret Chen speaking. This is a shared phone, but I'm Margaret. Sorry about the mix-up.
+[0:40] AGENT: No problem. Please provide your full name and date of birth.
+[0:41] PATIENT-BOT: Sure, my full name is Margaret Chen, and my date of birth is July 4, 2000.
+[1:06] AGENT: You have an upcoming appointment with Dr. Zygmunt Lokowski on Tuesday, August 18th. Is this the appointment you want to cancel?
+[1:08] PATIENT-BOT: Yes, exactly. It's on Tuesday, August 18th at 9:30 a.m. with Dr. Lukowski. I'd like to cancel that.
+[1:19] AGENT: Can you share the reason for canceling your appointment?
+[1:21] PATIENT-BOT: Oh, sure, it's just a scheduling conflict on my end. I really apologize for any inconvenience. Could you confirm that the appointment is canceled once it's done?
+[1:45] AGENT: Thanks for letting me know. To confirm, you want to cancel your appointment with Dr. Zbigniew Lukowski on Tuesday, August 18th. I'll take care of that now and let you know once it's canceled.
+[1:46] PATIENT-BOT: Thank you, yes, I really appreciate that. Please let me know once it's fully canceled so I can be sure everything’s taken care of.
+[2:07] AGENT: Your appointment with Dr. Zygnew Lakowski on Tuesday, August 18th at 9:30 a.m. has been canceled. Is there anything else I can help you with today?
+[2:08] PATIENT-BOT: Thank you so much for confirming. That’s all I needed today. I appreciate your help. Take care.
+[2:18] AGENT: You're welcome. Have a great day!
+[2:19] PATIENT-BOT: You too, bye now.
+
+# Ended: 2026-08-15T01:17:04

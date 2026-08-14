@@ -1,0 +1,27 @@
+# Scenario: weekend_booking
+# Call SID: CAc1f037acf1960f600bb29245bd3eb690
+# Started: 2026-08-15T00:22:49
+
+[0:06] AGENT: Call may be recorded for quality and training purposes. Para español, oprima el dos.
+[0:13] AGENT: Thanks for calling [clinic], part of [vendor]. How may I help you today?
+[0:14] PATIENT-BOT: Hi, I'd like to book an appointment, please.
+[0:24] AGENT: I see you're calling from the number we have on file. Am I speaking with Margaret?
+[0:26] PATIENT-BOT: No, this is a shared phone. My name is Tom Bradley. Let’s move on – I want to set up an appointment.
+[0:36] AGENT: Please provide your date of birth.
+[0:38] PATIENT-BOT: Sure, my date of birth is June 12, 1975.
+[0:56] AGENT: Just to confirm, I have your name as Tom Bradley and your date of birth as June 12, 1975. Is that correct? If so, could you please spell your first and last name for me?
+[0:57] PATIENT-BOT: Yes, that’s correct. My first name is Tom, T-O-M, and my last name is Bradley, B-R-A-D-L-E-Y.
+[1:21] AGENT: Would you like to use a phone number to look up your record? If so, please provide the number you have on file with us. If you're not sure, just let me know and we can confirm your name and date of birth again.
+[1:23] PATIENT-BOT: I'd prefer to go ahead and use my name and date of birth to look up the record. Let’s proceed with that.
+[1:48] AGENT: I'm unable to find your record in our system using your name and date of birth. I can connect you to our patient support team for further help. Would you like me to transfer you now?
+[1:51] PATIENT-BOT: Actually, I’d like to be registered as a new patient right now so we can continue. That way, I can go ahead and book that appointment.
+[2:09] AGENT: I'm not able to create new patient accounts directly. Our patient support team can help you get registered and set up your first appointment. Would you like me to connect you to them now?
+[2:11] PATIENT-BOT: I really can't do weekdays. Is there any way you can help me book an appointment for Sunday at 10 a.m.?
+[2:28] AGENT: We're open Monday through Friday and do not offer appointments on Sundays. Would you like to look at available times on a weekday morning instead?
+[2:30] PATIENT-BOT: I understand, but I really can't do weekdays. Are you absolutely sure there's no flexibility or any option for weekend availability at all?
+[2:53] AGENT: We only offer appointments Monday through Friday. There are no weekend or Sunday options available at [clinic]. If your schedule changes, I can help you find the earliest weekday slot.
+[2:54] PATIENT-BOT: Alright, I understand. Thanks for clarifying. I'll have to figure something out. Goodbye.
+[3:08] AGENT: Take care. If you need help in the future, just give us a call. Goodbye.
+[3:08] PATIENT-BOT: Will do. Thanks, goodbye.
+
+# Ended: 2026-08-15T00:26:00

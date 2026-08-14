@@ -1,0 +1,20 @@
+# Scenario: refill_request
+# Call SID: CAe58bc69a7e14addc61feed8afa387330
+# Started: 2026-08-15T00:58:18
+
+[0:13] AGENT: This call may be recorded for quality and training purposes. Para español, oprima el dos. Thanks for calling To the [clinic], part of [vendor]. How may I help you today?
+[0:16] PATIENT-BOT: Hi, I'd like to continue in English, thanks. My name's Frank DiMarco. I'm calling because I need a refill on my lisinopril 10 milligram prescription. I only have about two pills left, so I really need to know how quickly it can be ready at my CVS on Main Street.
+[0:35] AGENT: Please provide your date of birth.
+[0:36] PATIENT-BOT: Sure, it’s January 12, 1959.
+[0:52] AGENT: Can you please spell your first and last name to make sure I have it right? I have your date of birth as January 12th, 1959.
+[0:54] PATIENT-BOT: Of course. First name: F-R-A-N-K. Last name: D-I-M-A-R-C-O.
+[1:19] AGENT: Would you like to use your phone number to look up your record? If so, please tell me the number you have on file with us. If you're not sure, I can confirm your name and date of birth again.
+[1:20] PATIENT-BOT: Let's go with the name and date of birth you’ve got: Frank DiMarco, January 12, 1959. Could you check the record that way?
+[1:46] AGENT: I have your name as Frank DeMarco, date of birth January 12, 1959, and your phone number is XXX-XXX-XXXX. Is all of that correct?
+[1:46] PATIENT-BOT: Yes, that’s all correct. Let’s move forward with the refill.
+[2:09] PATIENT-BOT: Wait, before
+[2:09] AGENT: I wasn't able to find your record in our system, so I can't process your refill directly. I'll connect you to our patient support team for help. Please stay on the line. Transferring you now. Thank you.
+[2:14] AGENT: Hello, you've reached the [vendor] test line. Goodbye.
+[2:15] PATIENT-BOT: Understood. Thanks for your time. Take care.
+
+# Ended: 2026-08-15T01:00:41
