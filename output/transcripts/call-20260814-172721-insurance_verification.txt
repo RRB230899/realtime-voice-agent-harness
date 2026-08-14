@@ -1,0 +1,30 @@
+# Scenario: insurance_verification
+# Call SID: CA00e55117cbf212fca3824ede19ff3dc0
+# Started: 2026-08-14T17:27:21
+
+[0:13] AGENT: This call may be recorded for quality and training purposes. Para español, oprima el dos. Thanks for calling [clinic], part of [vendor]. How may I help you today?
+[0:15] PATIENT-BOT: Hi, I’d like to continue in English, please. My name is Sandra Willis. I'm calling because I need some information about getting an MRI for a shoulder injury. Could you help me with that?
+[0:33] AGENT: Sandra, can you please provide your date of birth? I need it to look up your information.
+[0:34] PATIENT-BOT: Sure, my date of birth is July 18, 1979.
+[0:55] AGENT: Just to confirm, I have your name as Sandra Willis and your date of birth as July 18, 1979. Is that correct? If so, could you please spell your first and last name for me?
+[0:57] PATIENT-BOT: Yes, that’s correct. My first name is Sandra: S-A-N-D-R-A. My last name is Willis: W-I-L-L-I-S.
+[1:22] AGENT: Would you like to use your phone number to look up your record? If so, please provide the number you have on file with us. If you're not sure, I can confirm your name and date of birth again. Let me know how you'd like to proceed.
+[1:26] PATIENT-BOT: Actually, I’m mainly calling to get some specific information. I’d like to know if you take Blue Cross Blue Shield PPO, and whether the MRI is done in-house or referred out. I also want to know the cost with insurance versus self-pay, and whether I need a referral or prior authorization. Could you help me with that detail first?
+[1:59] AGENT: I'll do my best to answer your questions, but I still need to confirm your identity for privacy reasons. Would you like to use your phone number to look up your record, or should I confirm your name and date of birth again?
+[2:00] PATIENT-BOT: I understand, but I’m really just trying to get general information right now. Could you tell me if you take Blue Cross Blue Shield PPO insurance?
+[2:31] PATIENT-BOT: Yes, I’d like more details. Is the MRI done in-house or referred
+[2:32] AGENT: I can share general information that [clinic] does accept most major insurance plans, including many Blue Cross Blue Shield PPO plans. Coverage can vary, so it's best to confirm with your insurance provider or the clinic directly for your specific plan. Would you like more details about MRI services or costs?
+[2:34] AGENT: Yes, can I put...
+[2:34] PATIENT-BOT: Understood. Could you let me know if the MRI is performed on-site, or
+[2:36] AGENT: [clinic] works.
+[2:37] PATIENT-BOT: And could you also share a rough idea of the cost with insurance versus self-pay?
+[2:39] AGENT: Elepo
+[2:40] PATIENT-BOT: I see. And do I need a referral or prior authorization before I can get the MRI done?
+[3:07] AGENT: Most insurance plans, including Blue Cross Blue Shield PPO, often require a referral or prior authorization for an MRI. It's best to check with your insurance provider or clinic staff to confirm your specific requirements. Would you like help connecting with our team for more details?
+[3:09] PATIENT-BOT: I’d appreciate that, but before connecting, could you give me even a rough estimate of the MRI cost with insurance versus self-pay, or is that something only the staff can confirm?
+[3:38] AGENT: Only the clinic staff can give you an exact MRI cost, since it depends on your insurance coverage and the type of MRI. I can connect you to our team so they can provide a detailed estimate and answer your questions. Would you like me to transfer you now?
+[3:40] PATIENT-BOT: Thanks for clarifying. Yes, please go ahead and transfer me to the team, so I can get those detailed cost estimates and next steps. Thanks so much.
+[3:54] AGENT: Transferring you now. Thank you.
+[3:55] PATIENT-BOT: Thank you.
+
+# Ended: 2026-08-14T17:31:20

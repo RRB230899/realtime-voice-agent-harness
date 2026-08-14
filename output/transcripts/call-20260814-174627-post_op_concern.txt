@@ -1,0 +1,17 @@
+# Scenario: post_op_concern
+# Call SID: CAe314d8bbc2e56d31faabad19ee40b282
+# Started: 2026-08-14T17:46:27
+
+[0:13] AGENT: This call may be recorded for quality and training purposes. Para español, oprima el dos. Thanks for calling [clinic], part of [vendor]. How may I help you today?
+[0:18] PATIENT-BOT: Hi, I'd like to continue in English, please. My name is Barbara Ellis. I’m calling because I had a knee replacement two weeks ago, and now the incision area is more swollen and warm than yesterday. I had a mild fever overnight. Is this normal, or should I come in?
+[0:40] AGENT: Can you please provide your date of birth? I need it to look up your chart before I can answer your questions.
+[0:40] PATIENT-BOT: Sure, my date of birth is April 12, 1963.
+[0:56] AGENT: Just to confirm, I have your name as Barbara Ellis and your date of birth as April 12th, 1963. Is that correct?
+[0:57] PATIENT-BOT: Yes, that’s correct.
+[1:15] AGENT: Would you like me to look up your record using your phone number on file? If so, please tell me the number you have listed with us. If you're not sure, I can confirm your name and date of birth again. Which would you prefer?
+[1:17] PATIENT-BOT: I’m not entirely sure which number's on file. But you’ve got my name and date of birth—Barbara Ellis, April 12, 1963. Could you go ahead and look up my record that way?
+[1:47] AGENT: I'm unable to access your chart right now, so I can't give medical advice. I'll connect you to our patient support team for help. Please stay on the line. I'm transferring you now. Thank you.
+[1:51] AGENT: Hello, you've reached the [vendor] test line. Goodbye.
+[1:53] PATIENT-BOT: All right, thank you. Goodbye.
+
+# Ended: 2026-08-14T17:48:27

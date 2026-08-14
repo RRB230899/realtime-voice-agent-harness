@@ -59,25 +59,33 @@ def download_recording(call_sid: str, retries: int = 10, delay_s: int = 3) -> st
     """Download the call recording as MP3 (recordings appear with a short
     lag after hangup, hence the retry loop). Returns the local path."""
     client = get_client()
-    recordings = []
+    recording = None
     for _ in range(retries):
-        recordings = client.recordings.list(call_sid=call_sid, limit=1)
-        if recordings:
+        recs = client.recordings.list(call_sid=call_sid, limit=1)
+        # the recording is listed before its media finishes processing —
+        # wait until Twilio marks it completed, or the media GET 404s
+        if recs and recs[0].status == "completed":
+            recording = recs[0]
             break
         time.sleep(delay_s)
-    if not recordings:
-        raise RuntimeError(f"No recording found for call {call_sid}")
+    if recording is None:
+        raise RuntimeError(f"No completed recording for call {call_sid}")
 
     url = (
         "https://api.twilio.com/2010-04-01/Accounts/"
-        f"{config.TWILIO_ACCOUNT_SID}/Recordings/{recordings[0].sid}.mp3"
+        f"{config.TWILIO_ACCOUNT_SID}/Recordings/{recording.sid}.mp3"
     )
-    resp = httpx.get(
-        url,
-        auth=(config.TWILIO_API_KEY_SID, config.TWILIO_API_KEY_SECRET),
-        follow_redirects=True,
-        timeout=60,
-    )
+    resp = None
+    for _ in range(retries):
+        resp = httpx.get(
+            url,
+            auth=(config.TWILIO_API_KEY_SID, config.TWILIO_API_KEY_SECRET),
+            follow_redirects=True,
+            timeout=60,
+        )
+        if resp.status_code != 404:  # 404 = media still encoding; retry
+            break
+        time.sleep(delay_s)
     resp.raise_for_status()
 
     os.makedirs(config.RECORDINGS_DIR, exist_ok=True)
