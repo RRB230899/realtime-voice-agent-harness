@@ -1,22 +1,77 @@
 # Architecture
 
-<!-- TODO: finalize after implementation. Draft reasoning below. -->
+## How it works
 
-The bot places an outbound Twilio call to the test line with dual-channel
-recording enabled. When the call connects, Twilio fetches TwiML from our
-FastAPI server and opens a Media Stream websocket carrying the callee's
-audio (g711_ulaw, 8kHz). The server bridges that stream to an OpenAI
-Realtime API session configured with a patient persona/scenario. Because
-the Realtime API natively accepts and emits g711_ulaw, audio passes
-through unmodified in both directions — no transcoding, minimal latency.
-Transcripts of both sides come from Realtime conversation events; audio
-deliverables come from Twilio's call recording.
+`main.py` asks Twilio's REST API to place a recorded, dual-channel outbound
+call to the test line. When the call connects, Twilio fetches TwiML from our
+FastAPI server (`/twiml`) which tells it to open a Media Stream websocket
+back to `/media`, carrying the callee's audio as g711_ulaw at 8kHz and a
+custom parameter naming the scenario. The bridge then opens a second
+websocket to the OpenAI Realtime API, configures the session with the
+scenario's persona instructions, voice, and server-side VAD, and pumps audio
+in both directions. Because the Realtime API natively accepts and emits
+g711_ulaw, audio passes through untouched — no transcoding step, no added
+latency, and no resampling artifacts on an 8kHz phone line. Transcripts of
+both sides come from Realtime conversation events (input-audio transcription
+for their agent, output transcripts for our bot) and are written live to a
+timestamped file per call; the audio deliverable is Twilio's own dual-channel
+recording, fetched after hangup.
 
-Key choice — Realtime API over an STT→LLM→TTS pipeline: turn-taking and
-barge-in handling are the hardest parts of a natural-sounding voice bot,
-and the Realtime API's server-side VAD handles them out of the box. A
-pipeline is cheaper and more controllable, but the grading bar here is
-conversation naturalness, which favors speech-to-speech.
+## Why these choices
 
-<!-- TODO: tradeoffs on frameworks (Pipecat), infra (ngrok vs deploy),
-cost notes -->
+**Speech-to-speech Realtime API over an STT→LLM→TTS pipeline.** The graded
+bar is a natural conversation, and the hardest parts of that are turn-taking
+and barge-in recovery. A pipeline (e.g. Deepgram → GPT → ElevenLabs) is
+cheaper and gives finer control, but you own the VAD, interruption logic,
+and latency budget across three vendors; getting that to sound human in a
+6-hour project is the risk. The Realtime API handles voice activity
+detection, turn-taking, and mid-utterance cancellation natively, at ~$0.40-0.50
+per call — well within the budget. Frameworks like Pipecat solve the same
+problem but add a dependency to learn and debug; with only one transport
+(Twilio) and one model, a direct ~150-line bridge was simpler than the
+framework would have been.
+
+**Local server + ngrok over a cloud deploy.** Twilio needs a public wss URL,
+but nothing else about the problem needs infrastructure. A tunnel to a local
+FastAPI process gives sub-second iteration (edit scenario → hot reload →
+call again), which mattered more than uptime for a test harness; a static
+ngrok domain keeps the URL stable across restarts.
+
+**Dual-channel recording was a deliberate choice**, not a default: with the
+agent on the left channel and our bot on the right, ffmpeg silence-detection
+per channel yields each side's speech segments, which is how the bug report
+quantifies overlaps, response latencies, and dead air without guessing from 
+a mixed track.
+
+## What we iterated on after hearing early calls
+
+- **Turn-taking:** VAD silence threshold 600ms → 900ms after call 1, where
+  the bot barged into a natural mid-greeting pause and caused ~12s of
+  overlap reconciliation. Verified fixed by channel analysis of later calls
+  (zero overlapping speech).
+- **Language handling:** the agent's Spanish IVR menu trapped an early call
+  in a Spanish loop; personas now insist on English and have an explicit
+  anti-repetition rule.
+- **Caller-ID collisions:** the test system binds our number to the first
+  registered profile ("Am I speaking with Margaret?"); personas answer the
+  mix-up in one line and move on instead of burning a minute.
+- **Persona voices:** each scenario now pins a gender/age-appropriate
+  Realtime voice after a male persona shipped with a female voice.
+- **The record wall:** once we learned new identities can't book (Bug 9),
+  record-dependent scenarios pivoted to run as the one registered profile,
+  which is what finally exercised the real scheduling, cancellation, and
+  refill logic.
+- **Recording races:** Twilio lists a recording before its media is
+  encoded; the downloader now waits for `status=completed` and retries the
+  media fetch on 404.
+
+## Known limitations
+
+True barge-in (our bot interrupting the agent mid-sentence) is limited by
+server-VAD turn gating — the bot yields when the agent speaks, so
+"interruption" scenarios test rapid turn exchange rather than sustained
+overlap. Transcript line ordering is by event arrival, so a fast reply can
+occasionally print before the utterance it answers (timestamps remain
+correct). And all calls originate from one number, so the test system's
+caller-ID profile binding shapes every conversation after the first — a
+constraint we turned into test coverage rather than an obstacle.
