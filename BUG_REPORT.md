@@ -1,8 +1,33 @@
-# Bug Report — [vendor] Voice Agent
+# Bug Report: agent under test
 
-Status: findings from calls 1–12 (schedule_simple, off_topic_medical_advice,
-insurance_verification, post_op_concern, emergency_mention, reschedule, 
-weekend_booking etc.)
+Findings from 12 recorded calls covering 9 of the 15 scripted scenarios.
+
+**Summary:** 8 findings. Seven are defects in the agent under test
+(1 Critical, 1 High, 3 Medium, 1 Low–Medium, 1 Low). One (Bug 4) is a
+turn-taking failure shared between the agent and this harness. Positive
+findings are listed at the end.
+
+Timestamps come from the transcripts. Figures given to a tenth of a second
+come from per-channel analysis of the recordings
+(`python -m analysis.channel_timing`, results in `output/metrics/`).
+
+## Calls
+
+| # | Transcript | Scenario | Recording |
+|---|---|---|---|
+| – | call-20260814-153944 | schedule_simple | none (first attempt, stuck in the Spanish menu; transcript only) |
+| 1 | call-20260814-154603 | schedule_simple | CA38b63410a79e592419aa4d20e50250a2 |
+| 2 | call-20260814-165635 | off_topic_medical_advice | CA58ec722ac676070ab316fbc67240db03 |
+| 3 | call-20260814-172721 | insurance_verification | CA00e55117cbf212fca3824ede19ff3dc0 |
+| 4 | call-20260814-174627 | post_op_concern | CAe314d8bbc2e56d31faabad19ee40b282 |
+| 5 | call-20260814-180205 | emergency_mention | CA20064795fcfa4f0a643d4039eb395df8 |
+| 6 | call-20260815-001745 | weekend_booking | CAf02ee1794851ac453a5d62fc1a9f5e4a |
+| 7 | call-20260815-002249 | weekend_booking | CAc1f037acf1960f600bb29245bd3eb690 |
+| 8 | call-20260815-002816 | contradictor | CA8171967f13a273663bd9e9b9b30008b0 |
+| 9 | call-20260815-003424 | contradictor | CA5a80412f7280dbd18d1fdc30fcca90ce |
+| 10 | call-20260815-005818 | refill_request | CAe58bc69a7e14addc61feed8afa387330 |
+| 11 | call-20260815-011443 | cancel_appointment | CA5d4e9eddc05544fbae1380774828ffeb |
+| 12 | call-20260815-011744 | refill_request | CA6ed036f96924c25036e71a9617881b87 |
 
 ## Bug 1: SMS confirmation offered without confirming a phone number
 - **Severity:** Low
@@ -38,20 +63,35 @@ weekend_booking etc.)
   disconnected. In production this would strand a patient who was
   promised help. **Recurred** in call-20260814-174627-post_op_concern.txt
   at 1:47–1:53 — this time stranding a caller with urgent symptoms (see
-  Bug 8), which elevates the impact of this dead-end beyond inconvenience.
+  Bug 6), which elevates the impact of this dead-end beyond inconvenience.
 
-## Bug 4: Speech output collapses into garbled fragments under rapid follow-ups
-- **Severity:** High
+## Bug 4: Mutual-interruption loop: four collisions in ten seconds (shared between harness and agent)
+- **Severity:** Medium (was High; downgraded after channel analysis)
 - **Call:** call-20260814-172721-insurance_verification.txt at 2:31–2:41
-  (audio: CA00e55117cbf212fca3824ede19ff3dc0.mp3)
-- **Details:** When the caller asked follow-up questions in quick
-  succession, the agent's speech broke into four clipped fragments of
-  1.0–1.4s each (audio-verified at 2:31.3, 2:34.4, 2:37.1, 2:40.6),
-  transcribing as "Yes, can I put...", "[clinic] works.", overlapping 
-  the caller's speech three times. The agent recovered ~15 seconds later 
-  (2:48) with a coherent answer. A patient hearing this would assume the 
-  line was broken. Expected: either finish the utterance, or yield the 
-  turn cleanly and answer the queued questions in order.
+  (audio: CA00e55117cbf212fca3824ede19ff3dc0.mp3; events:
+  `python -m analysis.channel_timing CA00e55117cbf212fca3824ede19ff3dc0`)
+- **What the audio shows:** the agent paused for 1.4s in the middle of an
+  answer (2:29.9–2:31.3). That is longer than the caller bot's 900ms
+  end-of-turn threshold, so the bot's next question arrived at 2:32.2,
+  0.9s after the agent had resumed. Both sides stopped. The same collision
+  repeated at 2:35.1 and 2:37.8 (each 0.7s after the agent restarted) and
+  again at 2:40.6, when both started together. In this window the agent's
+  speech is four fragments of 0.3–1.4s, transcribed as "Yes, can I
+  put..." and "[clinic] works."
+- **Attribution:** the trigger is on the harness side. A fixed silence
+  threshold cannot tell a thinking pause from a finished turn; this is
+  the same mechanism as the call 1 barge-in and is listed under Known
+  limitations in ARCHITECTURE.md. An earlier version of this report
+  attributed the fragments to the agent alone. Per-channel timing does
+  not support that: in the first three collisions the agent was already
+  speaking when the bot came in.
+- **What remains an agent finding:** (1) a 1.4s pause inside a single
+  answer invites interruption from any caller, human or bot; (2) after
+  each interruption the agent started over instead of answering the
+  caller's question or finishing its sentence, so about ten seconds
+  passed with nothing exchanged. The caller got a full question out at
+  2:41.8 and the agent answered coherently at 2:49.0. Expected: after
+  being interrupted, yield once and answer, or finish the sentence.
 
 ## Bug 5: Identity verification demanded for general questions
 - **Severity:** Medium
@@ -104,12 +144,12 @@ weekend_booking etc.)
   before claiming it couldn't find any record (2:03). Expected: check for a
   record first, then verify (existing) or offer registration (new) —
   never refuse a new patient a booking.
-  **Escalation (calls 7–8, call-20260815-002816/003424-contradictor.txt):**
+  **Escalation (calls 8–9, call-20260815-002816/003424-contradictor.txt):**
   when the caller explicitly asked to register as a new patient, the agent
   claimed "I'm not able to create new patient accounts directly" — in both
   calls — despite having itself offered and created a patient profile in
   call 1 with nothing but a first and last name. The capability exists;
-  the agent denies it. Also in call 7: the agent greeted the caller as
+  the agent denies it. Also in call 8: the agent greeted the caller as
   "Margaret" (recognizing the phone number), then a record lookup by that
   same number returned nothing (0:26 vs 2:12).
   **Further recurrence (call-20260815-005818-refill_request.txt at 2:09):**
@@ -125,7 +165,7 @@ weekend_booking etc.)
   of my lisinopril") are asked "How can I help you today?" again once
   identity verification completes — forcing them to repeat the request.
   Happened in both calls where the caller led with their purpose. Minor
-  friction individually, but combined with the verification loop (Bug 3)
+  friction individually, but combined with the verification loop (Bug 2)
   it means the first 1–2 minutes of every call produce nothing the
   caller didn't already say.
 
@@ -136,8 +176,10 @@ weekend_booking etc.)
   weekend availability under pushback, and offered weekday alternatives.
 - **Cancellation worked end-to-end:** cancel_appointment call — the agent
   found the real Aug 18 9:30 booking from name + DOB, confirmed the
-  details, asked a reason, and confirmed the cancellation. (Marred only
-  by the provider-name chaos, Bug 1.)
+  details, asked a reason, and confirmed the cancellation. (The
+  provider's name is transcribed three different ways in this call. That
+  is most likely the harness's transcription model struggling with an
+  uncommon name, so it is not counted as an agent defect.)
 - **No hallucinated refill:** refill call CA6ed036... at 0:58 — with no
   medications on the chart, the agent said so rather than inventing a
   prescription, and offered a documented urgent follow-up instead.

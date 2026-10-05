@@ -45,7 +45,7 @@ SCENARIOS: dict[str, dict] = {
     },
     "refill_request": {
         "voice": "marin",
-        # NOTE: runs as Margaret Chen (only identity on file — see Bug 9).
+        # NOTE: runs as Margaret Chen (only identity on file — see Bug 7).
         # Her demo profile likely has no prescriptions: also tests how the
         # agent handles a refill for a medication not on record.
         "persona": (
@@ -82,7 +82,7 @@ SCENARIOS: dict[str, dict] = {
     },
     "vague_patient": {
         "voice": "marin",
-        # NOTE: runs as Margaret Chen (only identity on file — see Bug 9).
+        # NOTE: runs as Margaret Chen (only identity on file — see Bug 7).
         "persona": (
             "Margaret Chen, 58, sweet but rambling and easily sidetracked "
             "today. Returning patient; DOB on file is July 4, 2000; "
@@ -110,7 +110,7 @@ SCENARIOS: dict[str, dict] = {
     },
     "impatient_patient": {
         "voice": "marin",
-        # NOTE: runs as Margaret Chen (only identity on file — see Bug 9).
+        # NOTE: runs as Margaret Chen (only identity on file — see Bug 7).
         "persona": (
             "Margaret Chen, 58, in a hurry between meetings today. "
             "Returning patient; DOB on file is July 4, 2000; confirm if "

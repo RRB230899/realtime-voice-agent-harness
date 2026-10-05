@@ -41,14 +41,18 @@ ngrok domain keeps the URL stable across restarts.
 agent on the left channel and our bot on the right, ffmpeg silence-detection
 per channel yields each side's speech segments, which is how the bug report
 quantifies overlaps, response latencies, and dead air without guessing from 
-a mixed track.
+a mixed track. `analysis/channel_timing.py` runs this on every recording
+and writes per-call results to `output/metrics/`.
 
 ## What we iterated on after hearing early calls
 
 - **Turn-taking:** VAD silence threshold 600ms → 900ms after call 1, where
   the bot barged into a natural mid-greeting pause and caused ~12s of
-  overlap reconciliation. Verified fixed by channel analysis of later calls
-  (zero overlapping speech).
+  overlap reconciliation. Channel analysis (`output/metrics/summary.md`)
+  shows the bot talking over the agent once in call 1 and not at all in
+  10 of the 11 later calls. The exception is the insurance call, where a
+  1.4s pause inside one of the agent's answers beat the 900ms threshold
+  and the two sides collided four times in ten seconds (Bug 4).
 - **Language handling:** the agent's Spanish IVR menu trapped an early call
   in a Spanish loop; personas now insist on English and have an explicit
   anti-repetition rule.
@@ -57,7 +61,7 @@ a mixed track.
   mix-up in one line and move on instead of burning a minute.
 - **Persona voices:** each scenario now pins a gender/age-appropriate
   Realtime voice after a male persona shipped with a female voice.
-- **The record wall:** once we learned new identities can't book (Bug 9),
+- **The record wall:** once we learned new identities can't book (Bug 7),
   record-dependent scenarios pivoted to run as the one registered profile,
   which is what finally exercised the real scheduling, cancellation, and
   refill logic.
@@ -75,3 +79,15 @@ occasionally print before the utterance it answers (timestamps remain
 correct). And all calls originate from one number, so the test system's
 caller-ID profile binding shapes every conversation after the first — a
 constraint we turned into test coverage rather than an obstacle.
+
+A fixed silence threshold cannot tell a pause from a finished turn. Raising
+it from 600ms to 900ms removed the barge-in on short pauses, but an agent
+that pauses for more than 900ms mid-answer still gets interrupted, and
+because both sides then yield and retry on similar timers they can collide
+repeatedly (Bug 4). Semantic turn detection, or a randomized backoff after a
+collision, would address this; neither is implemented.
+
+Transcripts are speech-recognition output over 8kHz phone audio, so uncommon
+proper nouns vary between calls (one provider's name appears four different
+ways). Any finding that depends on exact wording should be checked against
+the recording.
