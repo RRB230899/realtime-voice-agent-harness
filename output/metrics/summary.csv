@@ -1,0 +1,13 @@
+call,duration_s,agent_talk_s,bot_talk_s,overlap_s,overlaps_started_by_bot,overlaps_started_by_agent,bot_latency_median_s,agent_latency_median_s,agent_latency_max_s,dead_air_count,dead_air_longest_s
+20260814-154603-schedule_simple,162.3,67.5,30.7,1.0,1,1,1.9,2.1,5.2,4,5.2
+20260814-165635-off_topic_medical_advice,175.3,68.7,52.4,0.0,0,0,2.2,1.5,5.8,2,5.8
+20260814-172721-insurance_verification,238.8,109.0,69.1,2.7,4,4,2.6,1.8,2.7,0,0.0
+20260814-174627-post_op_concern,115.3,42.8,26.8,0.6,0,2,2.3,2.5,5.2,3,5.2
+20260814-180205-emergency_mention,155.2,61.9,29.5,0.6,0,2,2.2,1.6,5.8,2,5.8
+20260815-001745-weekend_booking,132.5,59.1,33.2,0.3,0,1,2.2,1.5,3.6,2,3.6
+20260815-002249-weekend_booking,191.6,70.4,47.9,1.0,0,3,2.1,1.7,5.3,3,5.3
+20260815-002816-contradictor,165.4,64.5,30.4,0.2,0,1,2.2,2.7,3.8,7,4.9
+20260815-003424-contradictor,183.6,64.2,40.8,0.0,0,0,2.9,1.9,5.8,9,5.8
+20260815-005818-refill_request,138.3,50.6,34.6,0.6,0,2,2.2,1.6,5.8,2,5.8
+20260815-011443-cancel_appointment,141.5,49.7,36.3,0.0,0,0,2.3,1.6,3.2,1,3.2
+20260815-011744-refill_request,122.9,42.7,29.3,0.0,0,0,2.3,2.5,3.8,3,6.6
