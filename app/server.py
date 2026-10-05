@@ -10,13 +10,14 @@ callee (their agent) and output transcripts for our bot.
 """
 import asyncio
 import json
+from xml.sax.saxutils import quoteattr
 
 import websockets
-from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, HTTPException, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import Response
 
 from . import config
-from .scenarios import build_instructions, get_voice
+from .scenarios import SCENARIOS, build_instructions, get_voice
 from .transcripts import TranscriptWriter
 
 app = FastAPI()
@@ -32,12 +33,16 @@ async def twiml(request: Request):
     """Twilio fetches this when the outbound call connects. It opens a
     media stream to /media, carrying the scenario as a custom parameter."""
     scenario = request.query_params.get("scenario", "schedule_simple")
+    if scenario not in SCENARIOS:
+        # This URL is public while the tunnel is up, so unknown input is
+        # rejected instead of being written into the XML.
+        raise HTTPException(status_code=400, detail="unknown scenario")
     ws_url = config.PUBLIC_URL.replace("https://", "wss://") + "/media"
     xml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <Response>
   <Connect>
-    <Stream url="{ws_url}">
-      <Parameter name="scenario" value="{scenario}" />
+    <Stream url={quoteattr(ws_url)}>
+      <Parameter name="scenario" value={quoteattr(scenario)} />
     </Stream>
   </Connect>
 </Response>"""
@@ -102,9 +107,9 @@ class Bridge:
                 start = data["start"]
                 self.stream_sid = start["streamSid"]
                 self.call_sid = start.get("callSid", "unknown")
-                self.scenario_key = start.get("customParameters", {}).get(
-                    "scenario", self.scenario_key
-                )
+                requested = start.get("customParameters", {}).get("scenario")
+                if requested in SCENARIOS:  # otherwise keep the default
+                    self.scenario_key = requested
                 print(f"[bridge] call {self.call_sid} scenario={self.scenario_key}")
                 return
 

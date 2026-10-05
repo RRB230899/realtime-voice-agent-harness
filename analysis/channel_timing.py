@@ -21,6 +21,7 @@ import argparse
 import csv
 import json
 import re
+import shutil
 import statistics
 import subprocess
 from pathlib import Path
@@ -256,6 +257,11 @@ def main() -> None:
     parser.add_argument("call_sid", nargs="?",
                         help="analyze one call and print its events")
     args = parser.parse_args()
+
+    missing = [tool for tool in ("ffmpeg", "ffprobe") if shutil.which(tool) is None]
+    if missing:
+        parser.error(f"{' and '.join(missing)} not found on PATH. "
+                     "Install ffmpeg, e.g. `brew install ffmpeg`.")
 
     labels = scenario_by_call_sid()
     paths = sorted(RECORDINGS_DIR.glob("*.mp3"),

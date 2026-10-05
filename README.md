@@ -1,5 +1,7 @@
 # Realtime Voice Agent Harness
 
+[![tests](https://github.com/RRB230899/realtime-voice-agent-harness/actions/workflows/tests.yml/badge.svg)](https://github.com/RRB230899/realtime-voice-agent-harness/actions/workflows/tests.yml)
+
 An adversarial caller for AI phone agents. It places real phone calls through
 Twilio, holds a speech-to-speech conversation over the OpenAI Realtime API
 while playing a scripted patient persona, records each side of the call on
@@ -76,7 +78,7 @@ app/
   config.py         environment loading and validation
 analysis/
   channel_timing.py per-channel overlap, latency and dead-air analysis
-tests/              unit tests for the interval logic (no audio or ffmpeg needed)
+tests/              unit tests (no audio, ffmpeg, network or credentials needed)
 output/
   transcripts/      timestamped transcript of both sides, one file per call
   recordings/       dual-channel MP3 per call (agent left, bot right)

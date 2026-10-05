@@ -3,6 +3,9 @@
 These use hand-written segments, so they need neither ffmpeg nor audio.
 Run with:  python -m pytest
 """
+import pytest
+
+from analysis import channel_timing
 from analysis.channel_timing import (
     AGENT, BOT, build_turns, find_dead_air, find_overlaps,
     response_latencies, speech_segments,
@@ -64,3 +67,11 @@ def test_dead_air_is_a_gap_where_neither_side_speaks():
     agent = [(0.0, 2.0), (9.0, 10.0)]
     bot = [(2.5, 4.0)]
     assert find_dead_air(agent, bot, min_gap=3.0) == [(4.0, 9.0)]
+
+
+def test_missing_ffmpeg_is_reported_clearly(monkeypatch, capsys):
+    monkeypatch.setattr(channel_timing.shutil, "which", lambda tool: None)
+    monkeypatch.setattr("sys.argv", ["channel_timing"])
+    with pytest.raises(SystemExit):
+        channel_timing.main()
+    assert "ffmpeg and ffprobe not found" in capsys.readouterr().err
