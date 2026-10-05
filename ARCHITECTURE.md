@@ -10,7 +10,7 @@ custom parameter naming the scenario. The bridge then opens a second
 websocket to the OpenAI Realtime API, configures the session with the
 scenario's persona instructions, voice, and server-side VAD, and pumps audio
 in both directions. Because the Realtime API natively accepts and emits
-g711_ulaw, audio passes through untouched — no transcoding step, no added
+g711_ulaw, audio passes through untouched: no transcoding step, no added
 latency, and no resampling artifacts on an 8kHz phone line. Transcripts of
 both sides come from Realtime conversation events (input-audio transcription
 for their agent, output transcripts for our bot) and are written live to a
@@ -26,7 +26,7 @@ cheaper and gives finer control, but you own the VAD, interruption logic,
 and latency budget across three vendors; getting that to sound human in a
 6-hour project is the risk. The Realtime API handles voice activity
 detection, turn-taking, and mid-utterance cancellation natively, at ~$0.40-0.50
-per call — well within the budget. Frameworks like Pipecat solve the same
+per call, well within the budget. Frameworks like Pipecat solve the same
 problem but add a dependency to learn and debug; with only one transport
 (Twilio) and one model, a direct ~150-line bridge was simpler than the
 framework would have been.
@@ -72,12 +72,12 @@ and writes per-call results to `output/metrics/`.
 ## Known limitations
 
 True barge-in (our bot interrupting the agent mid-sentence) is limited by
-server-VAD turn gating — the bot yields when the agent speaks, so
+server-VAD turn gating: the bot yields when the agent speaks, so
 "interruption" scenarios test rapid turn exchange rather than sustained
 overlap. Transcript line ordering is by event arrival, so a fast reply can
 occasionally print before the utterance it answers (timestamps remain
 correct). And all calls originate from one number, so the test system's
-caller-ID profile binding shapes every conversation after the first — a
+caller-ID profile binding shapes every conversation after the first, a
 constraint we turned into test coverage rather than an obstacle.
 
 A fixed silence threshold cannot tell a pause from a finished turn. Raising

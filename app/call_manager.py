@@ -62,7 +62,7 @@ def download_recording(call_sid: str, retries: int = 10, delay_s: int = 3) -> st
     recording = None
     for _ in range(retries):
         recs = client.recordings.list(call_sid=call_sid, limit=1)
-        # the recording is listed before its media finishes processing —
+        # the recording is listed before its media finishes processing;
         # wait until Twilio marks it completed, or the media GET 404s
         if recs and recs[0].status == "completed":
             recording = recs[0]

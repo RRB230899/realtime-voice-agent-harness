@@ -1,7 +1,7 @@
 """FastAPI server: serves TwiML for outbound calls and bridges
 Twilio Media Streams <-> OpenAI Realtime API.
 
-Data flow (both directions are raw g711_ulaw @ 8kHz — no transcoding):
+Data flow (both directions are raw g711_ulaw @ 8kHz, no transcoding):
     Twilio call audio --ws--> this server --ws--> OpenAI Realtime
     OpenAI speech     --ws--> this server --ws--> Twilio (played to callee)
 

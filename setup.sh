@@ -16,7 +16,7 @@ pip install -r requirements.txt
 
 if [ ! -f .env ]; then
   cp .env.example .env
-  echo "Created .env from .env.example — fill in your credentials."
+  echo "Created .env from .env.example. Fill in your credentials."
 fi
 
 echo "Setup complete. Activate with: source .venv/bin/activate"

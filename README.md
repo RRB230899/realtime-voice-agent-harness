@@ -15,10 +15,10 @@ All patient personas are fictional.
 | | |
 |---|---|
 | Calls | 12 recorded (32 minutes), covering 9 of the 15 scripted scenarios |
-| Findings | 8: seven defects in the agent (1 Critical, 1 High, 3 Medium, 1 Low–Medium, 1 Low) and one turn-taking failure shared with this harness |
+| Findings | 8: seven defects in the agent (1 Critical, 1 High, 3 Medium, 1 Low-Medium, 1 Low) and one turn-taking failure shared with this harness |
 | Most serious | The agent did not triage a caller describing post-surgical infection symptoms (Bug 6), and new patients could not book at all (Bug 7) |
 | Bot talking over the agent | Once in call 1 with a 600 ms end-of-turn threshold; none in 10 of the 11 later calls at 900 ms |
-| Response latency, median per call | Bot 1.9–2.9 s, agent 1.5–2.7 s; slowest single agent response 5.8 s |
+| Response latency, median per call | Bot 1.9 to 2.9 s, agent 1.5 to 2.7 s; slowest single agent response 5.8 s |
 
 Every finding, with call references and timestamps, is in
 [BUG_REPORT.md](BUG_REPORT.md). Per-call timing is in
