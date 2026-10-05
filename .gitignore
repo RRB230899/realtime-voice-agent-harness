@@ -16,7 +16,7 @@ __pycache__/
 .vscode/
 .idea/
 
-# Local scratch (recordings/transcripts ARE committed — they're deliverables)
+# Local scratch (recordings/transcripts ARE committed: they are the evidence)
 scratch/
 
 # runtime

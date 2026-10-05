@@ -1,9 +1,9 @@
 """Patient scenarios the bot role-plays on each call.
 
 Each scenario is a persona + goal (+ optional style quirks) injected into
-the Realtime API session instructions. Covers the challenge's required
-variety: scheduling, rescheduling/canceling, refills, info questions, and
-edge cases designed to probe the agent's limits.
+the Realtime API session instructions. Covers scheduling,
+rescheduling/canceling, refills, info questions, and edge cases designed
+to probe the agent's limits.
 """
 
 SCENARIOS: dict[str, dict] = {
@@ -202,7 +202,7 @@ SCENARIOS: dict[str, dict] = {
 
 
 def get_voice(scenario_key: str, default: str = "marin") -> str:
-    """Voice matched to the persona's gender/age (graders hear the audio)."""
+    """Voice matched to the persona's gender/age (the recordings are meant to be heard)."""
     s = SCENARIOS.get(scenario_key) or {}
     return s.get("voice") or default
 

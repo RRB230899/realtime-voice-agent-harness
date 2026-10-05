@@ -17,7 +17,7 @@ OPENAI_REALTIME_MODEL = os.getenv("OPENAI_REALTIME_MODEL", "gpt-realtime")
 OPENAI_REALTIME_URL = f"wss://api.openai.com/v1/realtime?model={OPENAI_REALTIME_MODEL}"
 BOT_VOICE = os.getenv("BOT_VOICE", "marin")
 
-# Output locations (committed deliverables)
+# Output locations (committed to the repo)
 TRANSCRIPTS_DIR = "output/transcripts"
 RECORDINGS_DIR = "output/recordings"
 

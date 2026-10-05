@@ -14,13 +14,13 @@ g711_ulaw, audio passes through untouched — no transcoding step, no added
 latency, and no resampling artifacts on an 8kHz phone line. Transcripts of
 both sides come from Realtime conversation events (input-audio transcription
 for their agent, output transcripts for our bot) and are written live to a
-timestamped file per call; the audio deliverable is Twilio's own dual-channel
+timestamped file per call; the audio record is Twilio's own dual-channel
 recording, fetched after hangup.
 
 ## Why these choices
 
-**Speech-to-speech Realtime API over an STT→LLM→TTS pipeline.** The graded
-bar is a natural conversation, and the hardest parts of that are turn-taking
+**Speech-to-speech Realtime API over an STT→LLM→TTS pipeline.** The
+bar was a natural-sounding conversation, and the hardest parts of that are turn-taking
 and barge-in recovery. A pipeline (e.g. Deepgram → GPT → ElevenLabs) is
 cheaper and gives finer control, but you own the VAD, interruption logic,
 and latency budget across three vendors; getting that to sound human in a
