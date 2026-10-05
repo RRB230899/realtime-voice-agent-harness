@@ -37,13 +37,13 @@ the end of a turn. The report was corrected and the limitation is documented.
 ```mermaid
 flowchart LR
     CLI["main.py<br/>places the call"] -->|REST| TW["Twilio"]
+    TW -->|dual-channel MP3| REC["recordings"]
+    REC --> AN["analysis/channel_timing.py"]
+    AN --> MET["output/metrics"]
     TW -->|phone call| AG["Agent under test"]
     TW <--> BR["server.py<br/>FastAPI bridge"]
     BR <--> OA["OpenAI Realtime API<br/>persona + server VAD"]
     BR --> TR["transcripts"]
-    TW -->|dual-channel MP3| REC["recordings"]
-    REC --> AN["analysis/channel_timing.py"]
-    AN --> MET["output/metrics"]
 ```
 
 `main.py` asks Twilio to place a recorded outbound call. When it connects,
